@@ -1,5 +1,6 @@
-var ago = require('ago');
-var el = require('el');
+'use strict';
+const ago = require('ago');
+const el = require('el');
 
 module.exports = tweet2html;
 
@@ -26,7 +27,7 @@ function adjustText(tweet) {
 }
 
 function createTextAdjustment(opt) {
-  var ta = {
+  const ta = {
     indices: opt.indices,
     text: ''
   };
@@ -41,7 +42,7 @@ function parseEntityType(entities, parsed, type, convertFn) {
     return;
   }
   entities[type].forEach(function(el) {
-    var opts, ta;
+    let opts, ta;
     opts = convertFn(el);
     if (opts) {
       if (opts.photo) {
@@ -56,9 +57,9 @@ function parseEntityType(entities, parsed, type, convertFn) {
   });
 }
 
-var entityParsers = {
+const entityParsers = {
   media: function(media) {
-    var data = {
+    const data = {
       indices: media.indices,
       text: ''
     };
@@ -100,7 +101,7 @@ var entityParsers = {
 };
 
 
-var urlPreParsers = [
+const urlPreParsers = [
   {
     type: 'photo',
     regex: /https?:\/\/instagram.com\/p\/([^\s\/]+)\/?/,
@@ -137,7 +138,7 @@ function preParseUrl(entities, preParser) {
   }
   entities.media = entities.media || [];
   entities.urls = entities.urls.filter(function(url) {
-    var match = url.expanded_url.match(preParser.regex);
+    const match = url.expanded_url.match(preParser.regex);
     if (match) {
       entities.media.push({
         type: preParser.type,
@@ -157,7 +158,7 @@ function preParseUrl(entities, preParser) {
 // item.full_text - tweet text for an untruncated tweet
 // item.entities - hashtags, urls, user_mentions, media (type: photo)
 function parseTweet(tweet, username, opts) {
-  var parsed = {
+  const parsed = {
     href: 'https://twitter.com/' + username + '/status/' + tweet.id_str,
     text: tweet.full_text || tweet.text,
     date: opts.formatDate(tweet.created_at),
@@ -172,12 +173,11 @@ function parseTweet(tweet, username, opts) {
 }
 
 function htmlTweet(tweet) {
-  var img, content = [
-    el('a.date', tweet.date, { href: tweet.href, target: '_blank' }),
+  let img, content = [
     el('.text', tweet.text)
   ];
   if (tweet.photo) {
-    img = el('img', { src: tweet.photo.src });
+    img = el('img.photo__img', { src: tweet.photo.src });
     content.push(el('a.photo', img, { href: tweet.photo.url,  target: '_blank' }));
   }
   if (tweet.iframe) {

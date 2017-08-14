@@ -27,6 +27,7 @@
     "mochify": "^2.14.1"
   },
   "dependencies": {
+    "ago": "^1.0.0",
     "el-component": "^1.0.0",
     "yields-ago": "~0"
   },
