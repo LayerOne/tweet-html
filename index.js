@@ -47,7 +47,7 @@ function parseEntityType(entities, parsed, type, convertFn) {
     if (opts) {
       if (opts.photo) {
         parsed.photos = parsed.photos || [];
-        parsed.photo.push(opts.photo);
+        parsed.photos.push(opts.photo);
       }
       if (opts.iframe) {
         parsed.iframe = opts.iframe;
