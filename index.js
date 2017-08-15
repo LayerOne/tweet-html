@@ -196,7 +196,7 @@ function htmlTweet(tweet) {
     }
   }
   if (tweet.iframe) {
-    content.push(el('iframe', { src: tweet.iframe.src, 'class': tweet.iframe.service }));
+    content.push(el('iframe', { src: tweet.iframe.src, 'class': tweet.iframe.service, 'frameborder': '0' }));
   }
 
   return content.join('');
