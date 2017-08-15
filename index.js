@@ -174,7 +174,7 @@ function parseTweet(tweet, username, opts) {
   };
   urlPreParsers.forEach(preParseUrl.bind(null, tweet.entities));
   Object.keys(entityParsers).forEach(function(type) {
-    if (type === 'media') {
+    if (type === 'media' && tweet.extended_entities) {
       parseEntityType(tweet.extended_entities, parsed, type, entityParsers[type]);
     } else {
       parseEntityType(tweet.entities, parsed, type, entityParsers[type]);
