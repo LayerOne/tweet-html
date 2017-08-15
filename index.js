@@ -78,7 +78,7 @@ const entityParsers = {
         src: media.media_url_https
       };
       return data;
-    } else if (media.type === 'youtube' || media.type === 'vimeo' || media.type === 'vine') {
+    } else if (media.type === 'youtube' || media.type === 'vimeo' || media.type === 'vine' || media.type === 'video') {
       data.iframe = {
         src: media.media_url_https,
         service: 'video ' + media.type
@@ -181,6 +181,7 @@ function parseTweet(tweet, username, opts) {
       parseEntityType(tweet.entities, parsed, type, entityParsers[type]);
     }
   });
+  parsed.quote = parseTweet(tweet.quoted_status, tweet.quoted_status.user.screen_name);
   adjustText(parsed);
   return parsed;
 }
@@ -207,6 +208,7 @@ function tweet2html(tweet, username, opts) {
   opts = opts || {
     formatDate: formatDate
   };
-  return htmlTweet(parseTweet(tweet, username, opts));
+  const parsedTweet = parseTweet(tweet, username, opts);
+  return htmlTweet(parsedTweet);
 }
 
