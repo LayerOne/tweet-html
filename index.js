@@ -64,13 +64,14 @@ const entityParsers = {
       text: ''
     };
     if (media.type === 'photo') {
-      data.photos = [];
+      console.log('media', media);
+      /*data.photos = [];
       for (const photo of media) {
         data.photos.push({
           url: media.expanded_url,
           src: media.media_url_https
         })
-      }
+      }*/
       data.photo = {
         url: media.expanded_url,
         src: media.media_url_https
