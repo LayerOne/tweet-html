@@ -46,7 +46,8 @@ function parseEntityType(entities, parsed, type, convertFn) {
     opts = convertFn(el);
     if (opts) {
       if (opts.photo) {
-        parsed.photo = opts.photo;
+        parsed.photos = parsed.photos || [];
+        parsed.photo.push(opts.photo);
       }
       if (opts.iframe) {
         parsed.iframe = opts.iframe;
@@ -188,9 +189,11 @@ function htmlTweet(tweet) {
   let img, content = [
     el('.text', tweet.text)
   ];
-  if (tweet.photo) {
-    img = el('img.photo__img', { src: tweet.photo.src });
-    content.push(el('a.photo', img, { href: tweet.photo.url,  target: '_blank' }));
+  if (tweet.photos) {
+    for (const photo of tweet.photos) {
+      img = el('img.photo__img', {src: photo.src});
+      content.push(el('a.photo', img, {href: photo.url, target: '_blank'}));
+    }
   }
   if (tweet.iframe) {
     content.push(el('iframe', { src: tweet.iframe.src, 'class': tweet.iframe.service }));
