@@ -64,6 +64,13 @@ const entityParsers = {
       text: ''
     };
     if (media.type === 'photo') {
+      data.photos = [];
+      for (const photo of media) {
+        data.photos.push({
+          url: media.expanded_url,
+          src: media.media_url_https
+        })
+      }
       data.photo = {
         url: media.expanded_url,
         src: media.media_url_https
@@ -166,7 +173,11 @@ function parseTweet(tweet, username, opts) {
   };
   urlPreParsers.forEach(preParseUrl.bind(null, tweet.entities));
   Object.keys(entityParsers).forEach(function(type) {
-    parseEntityType(tweet.extended_entities, parsed, type, entityParsers[type]);
+    if (type === 'media') {
+      parseEntityType(tweet.extended_entities, parsed, type, entityParsers[type]);
+    } else {
+      parseEntityType(tweet.entities, parsed, type, entityParsers[type]);
+    }
   });
   adjustText(parsed);
   return parsed;
