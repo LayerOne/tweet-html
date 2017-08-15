@@ -181,7 +181,6 @@ function parseTweet(tweet, username, opts) {
       parseEntityType(tweet.entities, parsed, type, entityParsers[type]);
     }
   });
-  parsed.quote = parseTweet(tweet.quoted_status, tweet.quoted_status.user.screen_name);
   adjustText(parsed);
   return parsed;
 }
