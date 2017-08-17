@@ -78,7 +78,7 @@ const entityParsers = {
         src: media.media_url_https
       };
       return data;
-    } else if (media.type === 'youtube' || media.type === 'vimeo' || media.type === 'vine' || media.type === 'video') {
+    } else if (media.type === 'youtube' || media.type === 'vimeo' || media.type === 'vine'/* || media.type === 'video'*/) {
       data.iframe = {
         src: media.media_url_https,
         service: 'video ' + media.type
