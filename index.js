@@ -199,7 +199,7 @@ function htmlTweet(tweet) {
     content.push(el('iframe', { src: tweet.iframe.src, 'class': tweet.iframe.service, 'frameborder': '0' }));
   }
 
-  return content.join('');
+  return {content: content.join(''), photos: tweet.photos};
 }
 
 
@@ -207,7 +207,10 @@ function tweet2html(tweet, username, opts) {
   opts = opts || {
     formatDate: formatDate
   };
-  const parsedTweet = parseTweet(tweet, username, opts);
-  return htmlTweet(parsedTweet);
+  const {content, photos} = parseTweet(tweet, username, opts);
+  return {
+    html: htmlTweet(content),
+    photos: photos
+  };
 }
 
