@@ -189,12 +189,12 @@ function htmlTweet(tweet) {
   let img, content = [
     el('.text', tweet.text)
   ];
-  if (tweet.photos) {
+  /*if (tweet.photos) {
     for (const photo of tweet.photos) {
       img = el('img.photo__img', {src: photo.src});
       content.push(el('a.photo', img, {href: photo.url, target: '_blank'}));
     }
-  }
+  }*/
   if (tweet.iframe) {
     content.push(el('iframe', { src: tweet.iframe.src, 'class': tweet.iframe.service, 'frameborder': '0' }));
   }
