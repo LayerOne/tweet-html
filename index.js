@@ -95,7 +95,7 @@ const entityParsers = {
   },
   user_mentions: function(mention) {
     return {
-      href: 'https://twitter.com/intent/user?user_id=' + mention.id_str,
+      href: `https://twitter.com/${mention.screen_name}`,
       text: '@' + mention.screen_name,
       indices: mention.indices
     };
