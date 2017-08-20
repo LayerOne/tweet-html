@@ -65,7 +65,7 @@ const entityParsers = {
       text: ''
     };
     if (media.type === 'photo') {
-      console.log('media', media);
+      // console.log('media', media);
       /*data.photos = [];
       for (const photo of media) {
         data.photos.push({
