@@ -166,11 +166,10 @@ function preParseUrl(entities, preParser) {
 // item.text - tweet text
 // item.full_text - tweet text for an untruncated tweet
 // item.entities - hashtags, urls, user_mentions, media (type: photo)
-function parseTweet(tweet, username, opts) {
+function parseTweet(tweet, username) {
   const parsed = {
     href: 'https://twitter.com/' + username + '/status/' + tweet.id_str,
     text: tweet.full_text || tweet.text,
-    date: opts.formatDate(tweet.created_at),
     textAdjustment: []
   };
   urlPreParsers.forEach(preParseUrl.bind(null, tweet.entities));
@@ -203,11 +202,8 @@ function htmlTweet(tweet) {
 }
 
 
-function tweet2html(tweet, username, opts) {
-  opts = opts || {
-    formatDate: formatDate
-  };
-  const parsedTweet = parseTweet(tweet, username, opts);
+function tweet2html(tweet, username) {
+  const parsedTweet = parseTweet(tweet, username);
 
   return htmlTweet(parsedTweet);
 }
