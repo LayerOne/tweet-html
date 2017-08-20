@@ -1,17 +1,10 @@
 'use strict';
-const ago = require('ago');
 const el = require('el');
 
 module.exports = tweet2html;
 
 function splice(str, start, end, replacement) {
   return [str.slice(0, start), replacement, str.slice(end)].join('');
-}
-
-
-function formatDate(created_at) {
-  // Date format: ddd MMM DD HH:mm:ss ZZ YYYY
-  return ago(new Date(created_at));
 }
 
 function adjustText(tweet) {
@@ -42,8 +35,7 @@ function parseEntityType(entities, parsed, type, convertFn) {
     return;
   }
   entities[type].forEach(function(el) {
-    let opts, ta;
-    opts = convertFn(el);
+    const opts = convertFn(el);
     if (opts) {
       if (opts.photo) {
         parsed.photos = parsed.photos || [];
@@ -52,7 +44,7 @@ function parseEntityType(entities, parsed, type, convertFn) {
       if (opts.iframe) {
         parsed.iframe = opts.iframe;
       }
-      ta = createTextAdjustment(opts);
+      const ta = createTextAdjustment(opts);
       parsed.textAdjustment.push(ta);
     }
   });
